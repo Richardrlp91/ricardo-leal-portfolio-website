@@ -1,0 +1,15 @@
+# Ignorar archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar logs y archivos temporales
+*.log
+npm-debug.log*
+
+# Ignorar carpetas de dependencias (si llegas a usar Sass o JS avanzado)
+node_modules/
+dist/
+
+# Ignorar archivos de configuración de editores
+.vscode/
+.idea/
