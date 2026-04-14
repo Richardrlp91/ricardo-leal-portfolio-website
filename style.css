@@ -7,4 +7,46 @@
  Version:      1.0.0
 */
 
-/* Esilos personalizados */
+/* ==========================================================================
+   TUS ESTILOS PERSONALIZADOS - Estilo: Arquitectura Sistémica Refinada
+   ========================================================================== */
+
+/* 1. Suavizado de tipografía (Vibe: Apple) */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 2. Micro-interacciones profesionales en enlaces (Vibe: Tania Rascia) */
+a {
+    transition: all 0.2s ease-in-out;
+}
+
+/* 3. Estilo para el "Mono" toque técnico en headers (Vibe: Stephango) */
+h1, h2, h3, h4 {
+    font-family: 'Fira Code', monospace; /* O la fuente mono que elijas */
+    font-weight: 600;
+    letter-spacing: -0.5px; /* Títulos un poco más juntos */
+    color: #1D1D1F;
+}
+
+/* 4. El "Apple Box" - Contenedores sutiles para tarjetas de proyecto */
+.gb-container.ricardo-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(0,0,0,0.05); /* Borde casi invisible */
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02); /* Sombra ultra suave */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gb-container.ricardo-card:hover {
+    transform: translateY(-5px); /* Pequeña elevación al pasar el ratón */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05); /* Sombra más pronunciada */
+}
+
+/* 5. Estilo de botón minimalista pero potente (Vibe: Apple) */
+.gb-button.ricardo-cta {
+    border-radius: 20px; /* Bordes redondeados */
+    padding: 10px 24px;
+    font-weight: 500;
+}
