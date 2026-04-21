@@ -50,3 +50,51 @@ h1, h2, h3, h4 {
     padding: 10px 24px;
     font-weight: 500;
 }
+/* ==========================================================================
+   MEJORAS DE UI PREMIUM (Apple & Stephango Style)
+   ========================================================================== */
+
+/* Botón estilo Apple con Usabilidad Mejorada */
+.apple-button {
+    /* Colores con alto contraste */
+    background-color: #0071e3 !important; /* Azul Apple */
+    color: #ffffff !important;            /* Blanco puro para máxima legibilidad */
+    
+    border-radius: 980px !important;
+    padding: 12px 28px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border: none !important;
+}
+
+.apple-button:hover {
+    background-color: #0077ed !important; /* Un azul ligeramente más brillante */
+    transform: scale(1.02);
+    box-shadow: 0 8px 15px rgba(0, 113, 227, 0.3);
+    color: #ffffff !important;
+}
+
+/* Efecto de Vidrio Esmerilado (Glassmorphism) para el Header */
+/* Úsalo si quieres que el menú sea semitransparente al hacer scroll */
+.site-header {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Tipografía de cuerpo mejorada para lectura larga (Vibe: Stephango) */
+p {
+    line-height: 1.7; /* Más espacio entre líneas para no cansar la vista */
+    margin-bottom: 1.5em;
+    color: #3a3a3c; /* Un gris oscuro Apple, menos agresivo que el negro */
+}
+
+
