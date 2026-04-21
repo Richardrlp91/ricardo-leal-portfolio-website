@@ -1,65 +1,146 @@
 /*
  Theme Name:   GeneratePress Child - Ricardo Leal
- Description:  Tema hijo personalizado para mi marca personal y portafolio.
+ Description:  Tema hijo personalizado para mi marca personal y portafolio. Soporte nativo para Dark Mode (default).
  Author:       Ricardo Leal Piñeres
  Author URI:   https://ricardoleal.cloud
  Template:     generatepress
- Version:      1.0.0
+ Version:      1.1.0
 */
 
 /* ==========================================================================
-   TUS ESTILOS PERSONALIZADOS - Estilo: Arquitectura Sistémica Refinada
+   1. VARIABLES DE SISTEMA (Arquitectura de Color)
    ========================================================================== */
 
-/* 1. Suavizado de tipografía (Vibe: Apple) */
+/* Modo Oscuro - Predeterminado (Vibe: Apple Pro / High Tech) */
+:root {
+    --bg-color: #000000;              /* Negro puro Apple */
+    --header-bg: rgba(0, 0, 0, 0.7);  /* Transparencia para Glassmorphism */
+    --text-main: #f5f5f7;             /* Blanco roto Apple */
+    --text-secondary: #a1a1a6;        /* Gris para descripciones */
+    --accent-blue: #0071e3;           /* Azul de acción Apple */
+    --card-bg: #1c1c1e;               /* Gris oscuro para contenedores */
+    --border-color: rgba(255, 255, 255, 0.1);
+    --selection-bg: rgba(0, 113, 227, 0.3);
+}
+
+/* Modo Claro - Clase activada por JS (Vibe: Stephango / Pureza) */
+body.light-mode {
+    --bg-color: #ffffff;
+    --header-bg: rgba(255, 255, 255, 0.8);
+    --text-main: #1d1d1f;
+    --text-secondary: #86868b;
+    --accent-blue: #0066cc;
+    --card-bg: #f5f5f7;
+    --border-color: rgba(0, 0, 0, 0.05);
+    --selection-bg: rgba(0, 102, 204, 0.2);
+}
+
+/* ==========================================================================
+   2. REGLAS GLOBALES Y TIPOGRAFÍA
+   ========================================================================== */
+
 body {
+    background-color: var(--bg-color) !important;
+    color: var(--text-main) !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.4s ease, color 0.4s ease; /* Transición suave de tema */
+}
+/* Estilo del botón de cambio de modo (Integrado en el Sistema) */
+#theme-toggle {
+    background-color: var(--card-bg) !important; /* Ahora usa el fondo dinámico */
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-main) !important;
+    
+    padding: 8px 12px;
+    border-radius: 12px; /* Un poco más Apple Style */
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Transición suave para que el botón no "parpadee" al cambiar */
+    transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.2s ease;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-/* 2. Micro-interacciones profesionales en enlaces (Vibe: Tania Rascia) */
+#theme-toggle:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1); /* Brilla un poco al pasar el ratón */
+    border-color: var(--accent-blue) !important;
+}
+
+/* Ajuste para los iconos dentro del botón */
+#theme-toggle span {
+    line-height: 1;
+    display: block;
+}
+::selection {
+    background: var(--selection-bg);
+}
+
+/* Enlaces (Vibe: Tania Rascia) */
 a {
-    transition: all 0.2s ease-in-out;
+    color: var(--accent-blue);
+    transition: opacity 0.2s ease-in-out;
+    text-decoration: none;
 }
 
-/* 3. Estilo para el "Mono" toque técnico en headers (Vibe: Stephango) */
+a:hover {
+    opacity: 0.7;
+}
+
+/* Headers Técnicos (Vibe: Stephango / Fira Code) */
 h1, h2, h3, h4 {
-    font-family: 'Fira Code', monospace; /* O la fuente mono que elijas */
+    font-family: 'Fira Code', 'IBM Plex Mono', monospace !important;
     font-weight: 600;
-    letter-spacing: -0.5px; /* Títulos un poco más juntos */
-    color: #1D1D1F;
+    letter-spacing: -0.5px;
+    color: var(--text-main) !important;
 }
 
-/* 4. El "Apple Box" - Contenedores sutiles para tarjetas de proyecto */
+/* Párrafos Legibles (Vibe: Apple / Lectura larga) */
+p {
+    line-height: 1.7;
+    margin-bottom: 1.5em;
+    color: var(--text-secondary) !important;
+}
+
+/* ==========================================================================
+   3. COMPONENTES DE DISEÑO (UI)
+   ========================================================================== */
+
+/* Cabecera con Efecto Cristal (Glassmorphism) */
+.site-header {
+    background-color: var(--header-bg) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.4s ease;
+}
+
+/* Tarjetas Profesionales (The Apple Box) */
 .gb-container.ricardo-card {
-    background: #FFFFFF;
-    border: 1px solid rgba(0,0,0,0.05); /* Borde casi invisible */
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.02); /* Sombra ultra suave */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 16px;
+    padding: 2rem;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
 }
 
 .gb-container.ricardo-card:hover {
-    transform: translateY(-5px); /* Pequeña elevación al pasar el ratón */
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05); /* Sombra más pronunciada */
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* 5. Estilo de botón minimalista pero potente (Vibe: Apple) */
-.gb-button.ricardo-cta {
-    border-radius: 20px; /* Bordes redondeados */
-    padding: 10px 24px;
-    font-weight: 500;
-}
-/* ==========================================================================
-   MEJORAS DE UI PREMIUM (Apple & Stephango Style)
-   ========================================================================== */
-
-/* Botón estilo Apple con Usabilidad Mejorada */
-.apple-button {
-    /* Colores con alto contraste */
-    background-color: #0071e3 !important; /* Azul Apple */
-    color: #ffffff !important;            /* Blanco puro para máxima legibilidad */
-    
+/* Botón "Apple Capsule" (Usabilidad y Estética) */
+.apple-button, .gb-button.ricardo-cta {
+    background-color: var(--accent-blue) !important;
+    color: #ffffff !important; /* Siempre blanco para contraste */
     border-radius: 980px !important;
     padding: 12px 28px !important;
     font-weight: 600 !important;
@@ -71,30 +152,21 @@ h1, h2, h3, h4 {
     border: none !important;
 }
 
-.apple-button:hover {
-    background-color: #0077ed !important; /* Un azul ligeramente más brillante */
-    transform: scale(1.02);
-    box-shadow: 0 8px 15px rgba(0, 113, 227, 0.3);
-    color: #ffffff !important;
+.apple-button:hover, .gb-button.ricardo-cta:hover {
+    transform: scale(1.03);
+    filter: brightness(1.1);
+    box-shadow: 0 8px 20px rgba(0, 113, 227, 0.4);
 }
 
-/* Efecto de Vidrio Esmerilado (Glassmorphism) para el Header */
-/* Úsalo si quieres que el menú sea semitransparente al hacer scroll */
-.site-header {
-    background-color: rgba(255, 255, 255, 0.8) !important;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+/* ==========================================================================
+   4. AJUSTES PARA WORDPRESS / GENERATEPRESS
+   ========================================================================== */
+
+/* Asegurar que el contenedor principal no tenga fondos blancos forzados */
+#page, .site-content, .inside-article {
+    background: transparent !important;
 }
 
-/* Tipografía de cuerpo mejorada para lectura larga (Vibe: Stephango) */
-p {
-    line-height: 1.7; /* Más espacio entre líneas para no cansar la vista */
-    margin-bottom: 1.5em;
-    color: #3a3a3c; /* Un gris oscuro Apple, menos agresivo que el negro */
+.entry-title {
+    color: var(--text-main) !important;
 }
-
-
