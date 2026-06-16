@@ -1,4 +1,4 @@
-name: Deploy Theme (Secure SFTP)
+name: Deploy Theme (Secure SFTP Pro)
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true # Soluciona la advertencia de Node.js
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   deploy:
@@ -17,11 +17,14 @@ jobs:
     - name: 🚚 Checkout local code
       uses: actions/checkout@v4
 
-    - name: 🚀 Sync files to Hostinger via SFTP
-      uses: wlixcc/sftp-deploy-action@v1.5.0
+    - name: 🚀 Copy files to Hostinger via SSH/SCP
+      uses: appleboy/scp-action@v0.1.7
       with:
-        username: ${{ secrets.SSH_USER }}
         host: ${{ secrets.SSH_HOST }}
-        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-        local_path: './*' # Sube todo el contenido del tema hijo
-        remote_path: '/home/u663435409/domains/ricardoleal.cloud/public_html/wp-content/themes/generatepress-child/'
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22 # El puerto estándar de SSH/SFTP seguro
+        source: "./*" # Sube todo el contenido de la carpeta actual
+        # IMPORTANTE: Reemplaza uXXXXXX con tus datos reales de Hostinger
+        target: "/home/u663435409/domains/ricardoleal.cloud/public_html/wp-content/themes/generatepress-child/"
+        rm: false # No borra la carpeta destino, solo sobrescribe los archivos
