@@ -1,9 +1,12 @@
-name: Deploy Theme (Best Practices)
+name: Deploy Theme (Secure SFTP)
 
 on:
   push:
     branches:
-      - main # Solo se ejecuta cuando confirmas los cambios en main
+      - main
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true # Soluciona la advertencia de Node.js
 
 jobs:
   deploy:
@@ -14,12 +17,11 @@ jobs:
     - name: 🚚 Checkout local code
       uses: actions/checkout@v4
 
-    - name: 🚀 Deploy via rsync over SFTP
-      uses: Burnett01/rsync-deployments@5.2.1
+    - name: 🚀 Sync files to Hostinger via SFTP
+      uses: wlixcc/SFTP-Deploy-Action@v1.5.0
       with:
-        switches: -avzr --delete # Sincroniza de forma inteligente y borra lo antiguo
-        path: ./
-        remote_path: /home/u663435409/domains/ricardoleal.cloud/public_html/wp-content/themes/generatepress-child/
-        remote_host: ${{ secrets.SSH_HOST }}
-        remote_user: ${{ secrets.SSH_USER }}
-        remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+        username: ${{ secrets.SSH_USER }}
+        host: ${{ secrets.SSH_HOST }}
+        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+        local_path: './*' # Sube todo el contenido del tema hijo
+        remote_path: '/home/u663435409/domains/ricardoleal.cloud/public_html/wp-content/themes/generatepress-child/'
