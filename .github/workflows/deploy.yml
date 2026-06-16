@@ -23,7 +23,7 @@ jobs:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: 22 # El puerto estándar de SSH/SFTP seguro
+        port: 650002 # El puerto estándar de SSH/SFTP seguro
         source: "./*" # Sube todo el contenido de la carpeta actual
         # IMPORTANTE: Reemplaza uXXXXXX con tus datos reales de Hostinger
         target: "/home/u663435409/domains/ricardoleal.cloud/public_html/wp-content/themes/generatepress-child/"
