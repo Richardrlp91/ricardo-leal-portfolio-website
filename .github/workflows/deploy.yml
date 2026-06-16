@@ -1,0 +1,25 @@
+name: Deploy Theme (Best Practices)
+
+on:
+  push:
+    branches:
+      - main # Solo se ejecuta cuando confirmas los cambios en main
+
+jobs:
+  deploy:
+    name: Secure SFTP Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 🚚 Checkout local code
+      uses: actions/checkout@v4
+
+    - name: 🚀 Deploy via rsync over SFTP
+      uses: Burnett01/rsync-deployments@5.2.1
+      with:
+        switches: -avzr --delete # Sincroniza de forma inteligente y borra lo antiguo
+        path: ./
+        remote_path: /home/u663435409/domains/ricardoleal.cloud/public_html/wp-content/themes/generatepress-child/
+        remote_host: ${{ secrets.SSH_HOST }}
+        remote_user: ${{ secrets.SSH_USER }}
+        remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
